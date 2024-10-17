@@ -1,8 +1,8 @@
 SELECT 
-    SUM(Kunde.Age * Produkt.Preis) AS "Umsatzsumme",
-    EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Verkäufer.Geburtsdatum) AS "Age Verkäufer",
-    Zeit.Jahr AS "Verkaufsjahr",
-    Produkt.Produktgruppe AS "Produktgruppe"
+    SUM(Produkt.Preis) AS "Umsatzsumme",
+    NVL(EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Verkäufer.Geburtsdatum), -1) AS "Age Verkäufer",
+    NVL(Zeit.Jahr, -1) AS "Verkaufsjahr",
+    NVL(Produkt.Produktgruppe, -1) AS "Produktgruppe"
 FROM 
     Verkauf
 JOIN 
