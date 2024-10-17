@@ -1,22 +1,25 @@
-SELECT 
-    NVL(Kunde.Age, 0) AS "Age Kunde",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Elektronik' THEN 1 ELSE 0 END) AS "Elektronik_ANZAHL",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Haushalt' THEN 1 ELSE 0 END) AS "Haushalt_ANZAHL",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Sport' THEN 1 ELSE 0 END) AS "Sport_ANZAHL",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Küche' THEN 1 ELSE 0 END) AS "Küche_ANZAHL",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Garten' THEN 1 ELSE 0 END) AS "Garten_ANZAHL",
-    SUM(CASE WHEN Produkt.Produktgruppe = 'Büro' THEN 1 ELSE 0 END) AS "Büro_ANZAHL"
-FROM 
-    Verkauf
-JOIN 
-    Kunde ON Verkauf.KundeKunde_ID = Kunde.Kunde_ID
-JOIN 
-    Produkt ON Verkauf.ProduktProdukt_ID = Produkt.Produkt_ID
-JOIN 
-    Zeit ON Verkauf.ZeitZeit_ID = Zeit.Zeit_ID
-WHERE 
-    Zeit.Jahr >= 2020
-GROUP BY 
-    Kunde.Age
-ORDER BY 
-    Kunde.Age;
+SELECT "AgeKunde",
+       NVL(Elektronik_ANZAHL, 0) AS Elektronik_ANZAHL,
+       NVL(Haushalt_ANZAHL, 0) AS Haushalt_ANZAHL,
+       NVL(Sport_ANZAHL, 0) AS Sport_ANZAHL,
+       NVL(Küche_ANZAHL, 0) AS Küche_ANZAHL,
+       NVL(Garten_ANZAHL, 0) AS Garten_ANZAHL,
+       NVL(Büro_ANZAHL, 0) AS Büro_ANZAHL
+FROM (
+    SELECT 
+        NVL("AgeKunde", 0) AS "AgeKunde",
+        "Produktgruppe",
+        "Haeufigkeit"
+    FROM 
+        Verkauf_2DC
+) 
+PIVOT (
+    SUM("Haeufigkeit") 
+    FOR "Produktgruppe" IN ('Elektronik' AS Elektronik_ANZAHL, 
+                          'Haushalt' AS Haushalt_ANZAHL, 
+                          'Sport' AS Sport_ANZAHL, 
+                          'Küche' AS Küche_ANZAHL, 
+                          'Garten' AS Garten_ANZAHL, 
+                          'Büro' AS Büro_ANZAHL)
+)
+ORDER BY "AgeKunde";

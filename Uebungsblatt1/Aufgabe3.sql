@@ -1,8 +1,8 @@
 CREATE TABLE Verkauf_2DC AS
 SELECT 
-    NVL(Kunde.Age, 0) AS "Age Kunde",
+    NVL(Kunde.Age, 0) AS "AgeKunde",
     NVL(Produkt.Produktgruppe, 'alle') AS "Produktgruppe",
-    COUNT(*) AS "Häufigkeit"
+    COUNT(*) AS "Haeufigkeit"
 FROM 
     Verkauf
 JOIN 
@@ -17,6 +17,6 @@ GROUP BY
     CUBE(Kunde.Age, Produkt.Produktgruppe);
 
 UPDATE Verkauf_2DC
-SET "Age Kunde" = NVL("Age Kunde", 0),
+SET "AgeKunde" = NVL("AgeKunde", 0),
     "Produktgruppe" = NVL("Produktgruppe", 'alle'),
-    "Häufigkeit" = NVL("Häufigkeit", 0);
+    "Haeufigkeit" = NVL("Haeufigkeit", 0)
