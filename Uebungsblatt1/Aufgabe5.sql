@@ -2,7 +2,7 @@ SELECT
     SUM(Produkt.Preis) AS "Umsatzsumme",
     NVL(EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Verkäufer.Geburtsdatum), -1) AS "Age Verkäufer",
     NVL(Zeit.Jahr, -1) AS "Verkaufsjahr",
-    NVL(Produkt.Produktgruppe, -1) AS "Produktgruppe"
+    NVL(Produkt.Produktgruppe, 'alle') AS "Produktgruppe"
 FROM 
     Verkauf
 JOIN 
@@ -16,6 +16,6 @@ JOIN
 WHERE 
     Zeit.Jahr >= 2020
 GROUP BY 
-    CUBE(EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Verkäufer.Geburtsdatum), Zeit.Jahr, Produkt.Produktgruppe)
+    ROLLUP(EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM Verkäufer.Geburtsdatum), Zeit.Jahr, Produkt.Produktgruppe)
 ORDER BY 
     "Age Verkäufer", "Verkaufsjahr", "Produktgruppe";
