@@ -1,6 +1,9 @@
 import java.io.*;
 import java.sql.*;
 
+// Aufgabe 2a) SQL-Injection bei Vorlesungsname folgendes genau so eingeben:
+// DBSYS' OR matrikelnummer = '123999' AND vorlesungsname = 'DBSYS
+
 public class Notenabfrage {
 
     public static void main(String args[]) {
