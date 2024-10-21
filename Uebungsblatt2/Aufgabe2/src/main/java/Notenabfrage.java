@@ -41,10 +41,19 @@ public class Notenabfrage {
             stmt = conn.createStatement();
             String matrikel = "123456";   // Wird normal aus den Anmeldedaten ermittelt
 
-            String mySelectQuery = "SELECT matrikelnummer, vorlesungsname, note FROM eck.Noten " +
+            // Einkommentieren für Aufgabe 2a) SQL-Injection
+            /*String mySelectQuery = "SELECT matrikelnummer, vorlesungsname, note FROM eck.Noten " +
                     "WHERE matrikelnummer = '" + matrikel + "' AND vorlesungsname = '" + vorlesungsname + "'";
 
-            rset = stmt.executeQuery(mySelectQuery);
+            rset = stmt.executeQuery(mySelectQuery);*/
+
+            // Einkommentieren für Aufgabe 2b) Prepared Statement
+            String mySelectQuery = "SELECT matrikelnummer, vorlesungsname, note FROM eck.Noten " +
+                     "WHERE matrikelnummer = ? AND vorlesungsname = ?";
+            PreparedStatement ps = conn.prepareStatement(mySelectQuery);
+            ps.setString(1, matrikel);
+            ps.setString(2, vorlesungsname);
+            rset = ps.executeQuery();
 
             while(rset.next())
                 System.out.println(rset.getString("matrikelnummer") + ", "
