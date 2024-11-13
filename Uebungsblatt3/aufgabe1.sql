@@ -74,6 +74,13 @@ INSERT INTO StudiengangTab VALUES (
     )
 );
 
+-- Studiengang Architektur
+INSERT INTO StudiengangTab VALUES (
+    StudiengangT('Architektur',
+        (SELECT REF(f) FROM FakultaetTab f WHERE f.name = 'Architektur')
+    )
+);
+
 -- 4 Studierende
 INSERT INTO StudierenderTab VALUES (
     StudierenderT('Marc Bohner', '304086',
@@ -99,47 +106,67 @@ INSERT INTO StudierenderTab VALUES (
     )
 );
 
+INSERT INTO StudierenderTab VALUES (
+    StudierenderT('Max Musterarchitekt', '304090',
+        (SELECT REF(s) FROM StudiengangTab s WHERE s.name = 'Architektur')
+    )
+);
+
 -- 6 Pruefungsleistungen
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-05', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'IT Security'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Marc Bohner'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304086'),
         2.0)
 );
 
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-10', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Datenbanksysteme'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Stefan Willmann'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304087'),
         1.7)
 );
 
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-15', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Programmiertechnik'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Phil Neuburger'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304088'),
         3.3)
 );
 
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-18', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'IT Security'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Niklas Schafran'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = '304089'),
         2.3)
 );
 
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-12', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Programmiertechnik'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Marc Bohner'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304086'),
         1.3)
 );
 
 INSERT INTO PruefungsergebnisTab VALUES (
     PruefungsergebnisT(TO_DATE('2024-02-19', 'YYYY-MM-DD'),
         (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Datenbanksysteme'),
-        (SELECT REF(s) FROM StudierenderTab s WHERE s.name = 'Stefan Willmann'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304087'),
         3.0)
+);
+
+INSERT INTO PruefungsergebnisTab VALUES (
+    PruefungsergebnisT(TO_DATE('2024-02-17', 'YYYY-MM-DD'),
+        (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Mathe'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304090'),
+        1.0)
+);
+
+INSERT INTO PruefungsergebnisTab VALUES (
+    PruefungsergebnisT(TO_DATE('2024-02-11', 'YYYY-MM-DD'),
+        (SELECT REF(v) FROM VorlesungTab v WHERE v.name = 'Malen'),
+        (SELECT REF(s) FROM StudierenderTab s WHERE s.matrikelnummer = '304090'),
+        2.3)
 );
 
 

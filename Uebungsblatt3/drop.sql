@@ -14,3 +14,5 @@ DROP TYPE ProfessorenVA force;
 DROP TYPE ProfessorT force;
 DROP TYPE PersonT force;
 DROP TYPE BODY StudierenderT;
+
+COMMIT;
