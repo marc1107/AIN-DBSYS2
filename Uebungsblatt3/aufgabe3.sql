@@ -1,4 +1,4 @@
--- a)
+-- a) getNotenschnitt
 CREATE OR REPLACE TYPE BODY StudierenderT AS
   MEMBER FUNCTION getNotenschnitt RETURN FLOAT IS
     v_notenschnitt FLOAT;
@@ -12,6 +12,6 @@ CREATE OR REPLACE TYPE BODY StudierenderT AS
 END;
 /
 
--- b)
+-- b) Überprüfen der erstellten Member funktion
 SELECT s.matrikelnummer, s.name, s.getNotenschnitt() AS notenschnitt
 FROM StudierenderTab s;
