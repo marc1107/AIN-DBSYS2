@@ -2,7 +2,6 @@ import org.hibernate.Query;
 import org.orm.PersistentException;
 import org.orm.PersistentSession;
 import teil_a.Uebungsblatt2PersistentManager;
-import teil_a.Studiengang;
 
 import java.util.List;
 
