@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Marc Bohner(HTWG Konstanz)
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="teil_a.Studiengang" table="Studiengang" lazy="false">
+		<id name="kuerzel" column="Kuerzel" type="string">
+			<generator class="assigned">
+			</generator>
+		</id>
+		<property name="name" column="Name" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="abschluss" column="Abschluss" type="string" length="255" not-null="false" lazy="false"/>
+		<set name="ORM_Vorlesung" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="StudiengangKuerzel" not-null="false"/>
+			<one-to-many class="teil_a.Vorlesung"/>
+		</set>
+	</class>
+</hibernate-mapping>
