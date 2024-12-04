@@ -1,0 +1,27 @@
+-- a)
+SELECT OWNER
+FROM all_tables
+WHERE table_name = 'DBESTELLUNG';
+
+-- b)
+SELECT column_name, data_type
+FROM all_tab_columns
+WHERE table_name = 'DBESTELLUNG';
+
+-- c)
+SELECT table_name
+FROM all_tables
+WHERE OWNER = (SELECT OWNER FROM all_tables WHERE table_name = 'DBESTELLUNG');
+
+-- d)
+SELECT SUM(num_rows) AS total_rows
+FROM all_tables
+WHERE OWNER = (SELECT OWNER FROM all_tables WHERE table_name = 'DBESTELLUNG');
+
+-- e)
+SELECT a.COLUMN_NAME, c_pk.TABLE_NAME AS REFERENCED_TABLE, c_pk.COLUMN_NAME AS REFERENCED_COLUMN
+FROM ALL_CONSTRAINTS c 
+JOIN ALL_CONS_COLUMNS a ON c.CONSTRAINT_NAME = a.CONSTRAINT_NAME 
+JOIN ALL_CONS_COLUMNS c_pk ON c.R_CONSTRAINT_NAME = c_pk.CONSTRAINT_NAME 
+WHERE c.CONSTRAINT_TYPE = 'R' 
+AND c.TABLE_NAME = 'DBESTELLUNG';
