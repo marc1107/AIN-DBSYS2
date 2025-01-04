@@ -46,4 +46,7 @@ INSERT INTO pers VALUES
 INSERT INTO pers VALUES
 (503, 'Junghans', 1975, NULL, 55000, 'Programmierer', 'K51', 123);
 
+INSERT INTO pers VALUES
+(502, 'Entwicklung', 1975, NULL, 55000, 'Programmierer', 'K51', 123);
+
 commit;
