@@ -197,11 +197,6 @@ db.auftrag.aggregate([
 
 ### g) An welchen Aufträgen hat die Firma im Jahr 2021 wie viel Geld eingenommen? Die Aufträge sind in „beschreibung“ gespeichert.
 
-Ausgabe:
-
-Entwicklung Onlineshop &nbsp; &nbsp; &nbsp; 61000<br>
-Installation Server &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 40000
-
 ```javascript
 db.auftrag.aggregate([
   { $match: { jahr: 2021 } },
