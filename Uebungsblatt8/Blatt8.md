@@ -201,7 +201,7 @@ db.auftrag.aggregate([
 db.auftrag.aggregate([
   { $match: { jahr: 2021 } },
   { $group: { _id: "$beschreibung", totalEinnahmen: { $sum: "$kosten" } } },
-]);
+]).forEach(function (u) { print(u._id + "\t" + u.totalEinnahmen);});
 ```
 
 ## Aufgabe 2

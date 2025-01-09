@@ -38,15 +38,12 @@ FROM pers p
 WHERE p.gehalt > (SELECT AVG(gehalt)
                     FROM pers WHERE beruf = 'Programmierer');
 
--- optimiert (Verwendung von Common Table Expression reduziert redundante Berechnungen)
-WITH AvgGehalt AS (
-    SELECT AVG(gehalt) AS avg_gehalt
-    FROM Pers
-    WHERE beruf = 'Programmierer'
-)
-SELECT COUNT(DISTINCT p.pnr)
-FROM Pers p, AvgGehalt
-WHERE p.gehalt > AvgGehalt.avg_gehalt;
+-- optimiert (Ohne DISTINCT)
+SELECT COUNT(p.pnr)
+FROM pers p
+WHERE p.gehalt > (SELECT AVG(gehalt)
+                    FROM pers WHERE beruf = 'Programmierer');
+
 
 
 -- d)
@@ -92,8 +89,10 @@ FROM Pers p1
 GROUP BY p1.name
 HAVING COUNT(*) = 1;
 
--- optimiert (Index erstellen?)
-CREATE INDEX idx_name ON Pers(name);
+-- optimiert (Ohne DISTINCT)
+SELECT p1.name
+FROM Pers p1
+GROUP BY p1.name
 
 
 -- g)

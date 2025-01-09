@@ -7,11 +7,13 @@ AND a.ort = 'Erlangen'
 GROUP BY p.anr
 ORDER BY p.anr;
 
--- a) Index auf Attribut beruf
-CREATE INDEX idx_beruf ON Pers(beruf);
+-- a) Index auf Attribut name
+CREATE INDEX idx_name ON Pers(name);
 
 -- b) Original Query markieren und F10 oder in Toolbar 2. neben Play Symbol (Explain Plan) klicken
 
 -- c) Kann bei Queries die nicht auf den Beruf prüfen langsamer werden:
 SELECT * FROM Pers WHERE gehalt > 65000;
+
+DELETE, UPDATE, INSERT (Änderungsbefehle)
 
