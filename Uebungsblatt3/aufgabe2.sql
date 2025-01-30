@@ -12,4 +12,5 @@ SELECT s.name
     
 -- c) Ermitteln Sie die Namen der Professoren der Fakultät Informatik.
 SELECT p.column_value.name
-    FROM TABLE (SELECT f.professoren FROM FakultaetTab f WHERE f.name = 'Informatik') p;
+    FROM FakultaetTab f, TABLE (f.professoren) p
+    WHERE f.name = 'Informatik';
