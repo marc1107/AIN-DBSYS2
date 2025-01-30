@@ -1,10 +1,8 @@
 SELECT * FROM pruefungsergebnistab;
 
 -- a) Ermitteln Sie die Namen aller Studierenderen die in Datenbanksysteme eine Note besser als 2.0 erzielt haben.
-SELECT s.matrikelnummer, s.name, p.note FROM PruefungsergebnisTab p
-    JOIN StudierenderTab s ON p.student = REF(s)
-    JOIN VorlesungTab v ON p.vorlesung = REF(v)
-    WHERE v.name = 'Datenbanksysteme'
+SELECT DISTINCT p.studierender.name, p.note FROM PruefungsergebnisTab p
+    WHERE p.vorlesung.name = 'Datenbanksysteme'
     AND p.note < 2.0;
   
 -- b) Ermitteln Sie die Namen der Studierenderen derjenigen Fakultät, deren Dekan Langweg heisst.  
